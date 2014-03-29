@@ -12,7 +12,6 @@ class user extends CI_Controller {
 	public function index()
 	{
 		$data['OK']="OK";
-		var_dump($this->input->post());
 		if($this->input->post())
 		{
 			$data = array
@@ -30,6 +29,28 @@ class user extends CI_Controller {
 		$data['users'] = $this->user_model->getUsers();
 		$this->load->view('header');
 		$this->load->view('showUser',$data);
+		$this->load->view('footer');
+	}
+
+	public function newUser()
+	{
+		if($this->input->post())
+		{
+			$data = array
+			(
+				'user_name' => $this->input->post('username'),
+				'password' => $this->input->post('password'),
+				'role' => $this->input->post('role'),
+			);
+			if(!$this->user_model->verifyUser($data))
+			{
+				$this->user_model->newUser($data);
+				redirect('user/showUser','refresh');
+			}
+			
+		}
+		$this->load->view('header');
+		$this->load->view('registerUser');
 		$this->load->view('footer');
 	}
 }

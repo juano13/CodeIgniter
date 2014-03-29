@@ -1,5 +1,9 @@
 <div class = "row">
 	<div class="col-sm-12 col-md-4 col-lg-2">
+
+		<?php
+		$data['menu']='viewUsers';
+		 $this->load->view('menuUser',$data); ?>
 	</div>
 	<div class="col-sm-12 col-md-8 col-lg-10">
 		<table class = "table table-hover">
